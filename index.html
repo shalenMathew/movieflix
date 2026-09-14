@@ -2,29 +2,118 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>MovieFlix</title>
+    <link rel="icon" type="image/png" href="asset/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main class="hero" aria-label="MovieFlix hero section">
-      <div class="hero__blue-glow" aria-hidden="true">
-        <span class="hero__glow-layer hero__glow-layer--outer"></span>
-        <span class="hero__glow-layer hero__glow-layer--mid"></span>
-        <span class="hero__glow-layer hero__glow-layer--core"></span>
+      <header class="site-header">
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-label="Open navigation"
+          aria-controls="site-drawer"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </header>
+
+      <div class="drawer-backdrop" aria-hidden="true"></div>
+      <aside class="site-drawer" id="site-drawer" aria-label="Main navigation" aria-hidden="true">
+        <div class="site-drawer__topline">
+          <span class="site-drawer__label">Explore MovieFlix</span>
+          <button class="drawer-close" type="button" aria-label="Close navigation">
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+        <nav class="site-drawer__nav">
+          <a href="#features">Features</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#socials">Socials</a>
+          <a href="#source-code">Source Code</a>
+        </nav>
+        <a class="site-drawer__cta" href="#download">Get App <span aria-hidden="true">&#8594;</span></a>
+      </aside>
+
+      <div class="hero__visual">
+        <div class="hero__blue-glow" aria-hidden="true">
+          <span class="hero__glow-layer hero__glow-layer--outer"></span>
+          <span class="hero__glow-layer hero__glow-layer--mid"></span>
+          <span class="hero__glow-layer hero__glow-layer--core"></span>
+        </div>
+        <h1 class="hero__title">MOVIEFLIX</h1>
+        <img
+          class="hero__mockup"
+          src="asset/mock_up_2.png"
+          alt="MovieFlix app mockup"
+        />
       </div>
-      <h1 class="hero__title">MOVIEFLIX</h1>
-      <img
-        class="hero__mockup"
-        src="asset/mock_up_2.png"
-        alt="MovieFlix app mockup"
-      />
     </main>
+
+    <section class="description" id="reviews" aria-labelledby="description-title">
+      <div class="description__inner">
+        <p class="description__quote" id="description-title">
+          MovieFlix is an <strong>ad-free, open-source</strong> journal for
+          tracking your favourite movies and TV shows <strong>offline</strong>.
+        </p>
+        <div class="description__author">
+          <img src="asset/profile.png" alt="Shalen Mathew" />
+          <div>
+            <p class="description__name">Shalen Mathew</p>
+            <p class="description__role">Developer</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const menuToggle = document.querySelector(".menu-toggle");
+      const drawerClose = document.querySelector(".drawer-close");
+      const drawer = document.querySelector(".site-drawer");
+      const backdrop = document.querySelector(".drawer-backdrop");
+      const drawerLinks = document.querySelectorAll(".site-drawer a");
+
+      const setDrawerState = (isOpen) => {
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+        drawer.setAttribute("aria-hidden", String(!isOpen));
+        backdrop.setAttribute("aria-hidden", String(!isOpen));
+        document.body.classList.toggle("drawer-is-open", isOpen);
+
+        if (isOpen) {
+          drawerClose.focus();
+        } else {
+          menuToggle.focus();
+        }
+      };
+
+      menuToggle.addEventListener("click", () => setDrawerState(true));
+      drawerClose.addEventListener("click", () => setDrawerState(false));
+      backdrop.addEventListener("click", () => setDrawerState(false));
+
+      drawerLinks.forEach((link) => {
+        link.addEventListener("click", () => setDrawerState(false));
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && menuToggle.getAttribute("aria-expanded") === "true") {
+          setDrawerState(false);
+        }
+      });
+    </script>
   </body>
 </html>
