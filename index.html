@@ -87,12 +87,34 @@
       const drawer = document.querySelector(".site-drawer");
       const backdrop = document.querySelector(".drawer-backdrop");
       const drawerLinks = document.querySelectorAll(".site-drawer a");
+      let lockedScrollY = 0;
+
+      const lockPageScroll = () => {
+        lockedScrollY = window.scrollY;
+        document.body.style.position = "fixed";
+        document.body.style.top = `-${lockedScrollY}px`;
+        document.body.style.width = "100%";
+      };
+
+      const unlockPageScroll = () => {
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.width = "";
+        window.scrollTo(0, lockedScrollY);
+      };
 
       const setDrawerState = (isOpen) => {
         menuToggle.setAttribute("aria-expanded", String(isOpen));
         drawer.setAttribute("aria-hidden", String(!isOpen));
         backdrop.setAttribute("aria-hidden", String(!isOpen));
+        document.documentElement.classList.toggle("drawer-is-open", isOpen);
         document.body.classList.toggle("drawer-is-open", isOpen);
+
+        if (isOpen) {
+          lockPageScroll();
+        } else {
+          unlockPageScroll();
+        }
 
         if (isOpen) {
           drawerClose.focus();

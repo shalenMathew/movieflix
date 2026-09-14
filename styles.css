@@ -224,6 +224,7 @@ body {
 
 .drawer-is-open {
   overflow: hidden;
+  overscroll-behavior: none;
 }
 
 .drawer-is-open .drawer-backdrop {
