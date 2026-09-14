@@ -450,7 +450,7 @@ body {
 
 @media (max-aspect-ratio: 1 / 1) {
   .hero {
-    min-height: calc(100svh + clamp(2rem, 8vw, 4rem));
+    min-height: 100svh;
     overflow: hidden;
   }
 
