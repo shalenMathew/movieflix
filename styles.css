@@ -324,6 +324,17 @@ body {
   font-size: clamp(0.72rem, 1vw, 0.85rem);
 }
 
+.work-in-progress {
+  margin: 0;
+  padding: 1.5rem 1rem 2rem;
+  background: #0b0b0b;
+  color: rgba(255, 255, 255, 0.38);
+  font-size: 2rem;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .hero__visual {
   position: absolute;
   inset: 0;
