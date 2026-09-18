@@ -15,6 +15,13 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="preload"
+      as="image"
+      href="asset/mock_up_2.webp"
+      type="image/webp"
+      fetchpriority="high"
+    />
 
 <!-- Cloudflare Web Analytics -->
  <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3d3f08e696d746a8bc3cd7b1e04422ce"}'></script>
@@ -69,8 +76,12 @@
         <h1 class="hero__title">MOVIEFLIX</h1>
         <img
           class="hero__mockup"
-          src="asset/mock_up_2.png"
+          src="asset/mock_up_2.webp"
           alt="MovieFlix app mockup"
+          width="1159"
+          height="1357"
+          fetchpriority="high"
+          decoding="async"
         />
       </div>
     </main>
@@ -78,7 +89,7 @@
     <section class="description" id="reviews" aria-labelledby="description-title">
       <div class="description__inner">
         <div class="description__mascot" aria-hidden="true">
-          <img src="asset/mascot.gif" alt="" />
+          <img src="asset/mascot.gif" alt="" loading="lazy" decoding="async" />
         </div>
         <div class="description__content">
           <p class="description__quote" id="description-title">
@@ -86,7 +97,12 @@
             tracking your favourite movies and TV shows <strong>offline</strong>.
           </p>
           <div class="description__author">
-            <img src="asset/profile.png" alt="Shalen Mathew" />
+            <img
+              src="asset/profile.png"
+              alt="Shalen Mathew"
+              loading="lazy"
+              decoding="async"
+            />
             <div>
               <p class="description__name">Shalen Mathew</p>
               <p class="description__role">Developer</p>
