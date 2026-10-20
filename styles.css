@@ -365,7 +365,20 @@ body {
   pointer-events: none;
 }
 
+.features__mockup-wrap::before {
+  position: absolute;
+  z-index: 0;
+  inset: -5% -28%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(37, 84, 255, 0.5) 0%, rgba(22, 58, 200, 0.3) 45%, transparent 74%);
+  content: "";
+  filter: blur(30px);
+  pointer-events: none;
+}
+
 .features__mockup {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 100%;
   height: auto;
@@ -598,7 +611,7 @@ body {
   .features__poster {
     width: clamp(5.3rem, 20vw, 6.3rem);
     height: clamp(7rem, 34vw, 8.5rem);
-    --poster-step: clamp(6rem, 22vw, 7rem);
+    --poster-step: clamp(5.25rem, 19vw, 6.4rem);
     --poster-active-scale: 1.04;
 
     border-radius: 0.8rem;
@@ -634,7 +647,7 @@ body {
   .features__poster {
     width: 5.3rem;
     height: 7rem;
-    --poster-step: 6rem;
+    --poster-step: 5.25rem;
   }
 
   .features__poster.is-active {
@@ -1075,7 +1088,7 @@ body {
   }
 
   .features__carousel {
-    top: calc(58% + min(24.8vw, 128px) - 28px);
+    top: calc(58% + min(24.8vw, 128px) - 12px);
     width: min(114vw, 920px);
     height: clamp(9rem, 30vw, 13rem);
   }
