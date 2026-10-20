@@ -130,12 +130,15 @@ body {
   bottom: 0;
   z-index: 9;
   display: flex;
-  width: min(86vw, 26rem);
-  padding: clamp(1.5rem, 5vw, 3rem);
+  width: min(90vw, 29rem);
+  padding: clamp(1.25rem, 4vw, 2.5rem);
   flex-direction: column;
-  border-left: 1px solid #949494;
-  background: linear-gradient(145deg, rgba(7, 12, 30, 0.98), rgba(2, 3, 10, 0.99));
-  box-shadow: -20px 0 70px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  border-left: 1px solid rgba(151, 173, 255, 0.2);
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(22, 69, 255, 0.2), transparent 45%),
+    linear-gradient(150deg, #0b1022 0%, #050711 58%, #03040a 100%);
+  box-shadow: -24px 0 80px rgba(0, 0, 0, 0.58);
   transform: translateX(100%);
   transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -144,11 +147,45 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: rgba(194, 207, 255, 0.65);
-  font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.14em;
+  gap: 1rem;
+}
+
+.site-drawer__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
+}
+
+.site-drawer__brand img {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  flex: 0 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.9rem;
+  object-fit: cover;
+}
+
+.site-drawer__brand > div {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.site-drawer__label {
+  color: #91a8ff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  line-height: 1;
   text-transform: uppercase;
+}
+
+.site-drawer__brand strong {
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
 }
 
 .drawer-close {
@@ -179,43 +216,64 @@ body {
 
 .site-drawer__nav {
   display: grid;
-  gap: clamp(1.25rem, 4vw, 2rem);
+  gap: 0.55rem;
   margin: auto 0;
 }
 
 .site-drawer__nav a {
-  width: fit-content;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 3.75rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.025);
   color: #fff;
-  font-size: clamp(1.6rem, 5vw, 2.5rem);
-  font-weight: 400;
-  letter-spacing: 0;
+  font-size: clamp(1.05rem, 3vw, 1.2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
   text-decoration: none;
-  text-shadow: none;
-  transition: color 180ms ease, transform 180ms ease, text-shadow 180ms ease;
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
 }
 
 .site-drawer__nav a:hover,
 .site-drawer__nav a:focus-visible {
-  color: #fff;
+  border-color: rgba(116, 147, 255, 0.34);
   outline: none;
-  text-shadow:
-    0 0 2px rgba(255, 255, 255, 1),
-    0 0 10px rgba(255, 255, 255, 0.9),
-    0 0 22px rgba(255, 255, 255, 0.5);
-  transform: translateX(0.4rem);
+  background: rgba(48, 82, 207, 0.16);
+  transform: translateX(0.2rem);
+}
+
+.site-drawer__footer {
+  display: grid;
+  gap: 0.85rem;
 }
 
 .site-drawer__cta {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.25rem;
+  min-height: 3.5rem;
+  padding: 0.9rem 1.2rem;
   border-radius: 999px;
-  background: #fff;
-  color: #03050d;
+  background: linear-gradient(105deg, #315dff, #1645ff 62%, #4773ff);
+  color: #fff;
   font-size: 1rem;
-  font-weight: 900;
+  font-weight: 750;
   text-decoration: none;
+  box-shadow: 0 10px 28px rgba(22, 69, 255, 0.25);
+  transition: box-shadow 180ms ease, transform 180ms ease, filter 180ms ease;
+}
+
+.site-drawer__cta:hover,
+.site-drawer__cta:focus-visible {
+  outline: none;
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(22, 69, 255, 0.38);
 }
 
 .site-drawer__cta span {
@@ -236,10 +294,377 @@ body {
   transform: translateX(0);
 }
 
+/* =========================================================
+   FEATURES
+   ========================================================= */
+
+.features {
+  position: relative;
+  z-index: 0;
+  padding: clamp(1rem, 2.5vw, 2rem) 0 clamp(4rem, 8vw, 6rem);
+  background: #0b0b0b;
+  overflow: hidden;
+}
+
+.features__title {
+  position: relative;
+  z-index: 10;
+  margin: 0 0 clamp(1.5rem, 3vw, 2.5rem);
+  color: transparent;
+  background: linear-gradient(100deg, #fff 20%, #dce5ff 62%, #8da7ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: clamp(1.6rem, 2.8vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  filter: drop-shadow(0 3px 16px rgba(47, 83, 255, 0.22));
+}
+
+.features__title::after {
+  display: block;
+  width: 2.75rem;
+  height: 3px;
+  margin: 0.8rem auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #1645ff, #9fb2ff);
+  box-shadow: 0 0 14px rgba(22, 69, 255, 0.5);
+  content: "";
+}
+
+/* Main composition area */
+.features__stage {
+  position: relative;
+  width: 100%;
+  height: clamp(42rem, 62vw, 55rem);
+  margin: 0 auto;
+  overflow: visible;
+  isolation: isolate;
+}
+
+/* =========================================================
+   PHONE MOCKUP
+   ========================================================= */
+
+.features__mockup-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+
+  /*
+   * Keep the complete mockup visible.
+   * The image itself contains the correct empty purple
+   * area where the posters should sit.
+   */
+  width: min(34vw, 430px);
+
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.features__mockup {
+  display: block;
+  width: 100%;
+  height: auto;
+
+  filter:
+    drop-shadow(0 22px 35px rgba(0, 0, 0, 0.72));
+
+  user-select: none;
+}
+
+
+/* =========================================================
+   POSTER CAROUSEL
+   ========================================================= */
+
+.features__carousel {
+  position: absolute;
+
+  /*
+   * The carousel is horizontally centered,
+   * but vertically positioned lower than the
+   * center of the phone.
+   *
+   * This corresponds to the large purple area
+   * inside mockup_feat.webp.
+   */
+  top: calc(50% + min(14.5vw, 183px) - 28px);
+  left: calc(50% + clamp(8px, 1vw, 14px));
+
+  z-index: 5;
+
+  width: min(100vw, 1300px);
+  height: clamp(15rem, 22vw, 18rem);
+
+  transform: translate(-50%, -50%);
+
+  overflow: hidden;
+  pointer-events: none;
+
+  /*
+   * Posters remain fully opaque in the center.
+   * Only the outer edges fade.
+   */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.2) 5%,
+    rgba(0, 0, 0, 0.75) 12%,
+    #000 19%,
+    #000 81%,
+    rgba(0, 0, 0, 0.75) 88%,
+    rgba(0, 0, 0, 0.2) 95%,
+    transparent 100%
+  );
+
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.2) 5%,
+    rgba(0, 0, 0, 0.75) 12%,
+    #000 19%,
+    #000 81%,
+    rgba(0, 0, 0, 0.75) 88%,
+    rgba(0, 0, 0, 0.2) 95%,
+    transparent 100%
+  );
+}
+
+
+/* =========================================================
+   POSTER TRACK
+   ========================================================= */
+
+.features__track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+
+/* =========================================================
+   INDIVIDUAL POSTERS
+   ========================================================= */
+
+.features__poster {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  display: block;
+
+  width: clamp(8rem, 10vw, 9.5rem);
+  height: clamp(11rem, 18vw, 13.5rem);
+  --poster-step: clamp(8rem, 11.5vw, 8.8rem);
+  --poster-side-scale: 0.78;
+  --poster-active-scale: 1.08;
+
+  object-fit: cover;
+
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  border-radius: 1rem;
+
+  background: #080808;
+
+  opacity: 0.76;
+  transform:
+    translate(-50%, -50%)
+    translateX(calc(var(--poster-slot, 0) * var(--poster-step, 180px) + var(--poster-shift, 0px)))
+    scale(var(--poster-side-scale, 0.78));
+
+  transform-origin: center center;
+
+  box-shadow:
+    0 16px 30px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+
+  transition:
+    transform 900ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 900ms ease,
+    box-shadow 900ms ease;
+
+  will-change: transform, opacity;
+
+  backface-visibility: hidden;
+}
+
+
+/* =========================================================
+   ACTIVE / CENTER POSTER
+   ========================================================= */
+
+.features__poster.is-active {
+  z-index: 10;
+
+  opacity: 1;
+
+  /*
+   * Exact center of the poster carousel.
+   * This is the featured poster.
+   */
+  transform:
+    translate(-50%, -50%)
+    translateX(calc(var(--poster-slot, 0) * var(--poster-step, 180px) + var(--poster-shift, 0px)))
+    scale(var(--poster-active-scale, 1.08));
+
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+
+
+.features__poster.is-repositioning {
+  transition: none !important;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .features__stage {
+    height: 44rem;
+  }
+
+  .features__mockup-wrap {
+    width: min(46vw, 360px);
+  }
+
+  .features__carousel {
+    top: calc(50% + min(18.8vw, 154px) - 28px);
+    width: 120vw;
+    height: 15rem;
+  }
+
+  .features__poster {
+    width: clamp(7rem, 16vw, 8rem);
+    height: clamp(9.5rem, 23vw, 11rem);
+    --poster-step: clamp(7.3rem, 16vw, 8.4rem);
+  }
+
+  .features__poster.is-active {
+    transform:
+      translate(-50%, -50%)
+      translateX(calc(var(--poster-slot, 0) * var(--poster-step, 180px) + var(--poster-shift, 0px)))
+      scale(var(--poster-active-scale, 1.08));
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .features {
+    padding-top: 1.5rem;
+    padding-bottom: 4rem;
+  }
+
+  .features__title {
+    margin-bottom: 1.25rem;
+    font-size: 2rem;
+  }
+
+  .features__stage {
+    height: 38rem;
+  }
+
+  /*
+   * Smaller phone, but keep the complete asset visible.
+   */
+  .features__mockup-wrap {
+    width: min(70vw, 300px);
+  }
+
+  /*
+   * Move the poster line down into the
+   * purple portion of the phone.
+   */
+  .features__carousel {
+    top: calc(50% + min(24.8vw, 128px) - 28px);
+    width: 140vw;
+    height: 13rem;
+  }
+
+  .features__poster {
+    width: clamp(5.3rem, 20vw, 6.3rem);
+    height: clamp(7rem, 34vw, 8.5rem);
+    --poster-step: clamp(6rem, 22vw, 7rem);
+    --poster-active-scale: 1.04;
+
+    border-radius: 0.8rem;
+  }
+
+  .features__poster.is-active {
+    transform:
+      translate(-50%, -50%)
+      translateX(calc(var(--poster-slot, 0) * var(--poster-step, 180px) + var(--poster-shift, 0px)))
+      scale(var(--poster-active-scale, 1.04));
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+  .features__stage {
+    height: 34rem;
+  }
+
+  .features__mockup-wrap {
+    width: 74vw;
+  }
+
+  .features__carousel {
+    top: calc(50% + 47px);
+  }
+
+  .features__poster {
+    width: 5.3rem;
+    height: 7rem;
+    --poster-step: 6rem;
+  }
+
+  .features__poster.is-active {
+    transform:
+      translate(-50%, -50%)
+      translateX(calc(var(--poster-slot, 0) * var(--poster-step, 180px) + var(--poster-shift, 0px)))
+      scale(var(--poster-active-scale, 1.04));
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .features__poster {
+    transition: none;
+  }
+
+  .features__poster.is-active {
+    opacity: 1;
+  }
+}
+
 .description {
   position: relative;
   z-index: 0;
-  padding: clamp(8rem, 16vw, 13rem) clamp(1.5rem, 8vw, 10rem);
+  padding: clamp(8rem, 16vw, 13rem) clamp(1.5rem, 8vw, 10rem) 4rem;
   overflow: hidden;
   background:
     linear-gradient(180deg, #050505 0%, #0b0b0b 100%),
@@ -502,7 +927,7 @@ body {
   }
 
   .description {
-    padding: 1rem 1.5rem 7rem;
+    padding: 1rem 1.5rem 4rem;
   }
 
   .description__inner {
@@ -632,6 +1057,27 @@ body {
   50% {
     transform: translateX(-50%) scale(1.035);
     filter: brightness(1.12);
+  }
+}
+
+@media (max-width: 780px) {
+  .features {
+    padding-top: 1.25rem;
+  }
+
+  .features__stage {
+    height: clamp(20rem, 72vw, 28rem);
+  }
+
+  .features__mockup-wrap {
+    top: 58%;
+    width: min(58vw, 300px);
+  }
+
+  .features__carousel {
+    top: calc(58% + min(24.8vw, 128px) - 28px);
+    width: min(114vw, 920px);
+    height: clamp(9rem, 30vw, 13rem);
   }
 }
 

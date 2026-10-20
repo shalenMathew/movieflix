@@ -52,7 +52,13 @@
       <div class="drawer-backdrop" aria-hidden="true"></div>
       <aside class="site-drawer" id="site-drawer" aria-label="Main navigation" aria-hidden="true">
         <div class="site-drawer__topline">
-          <span class="site-drawer__label">Explore MovieFlix</span>
+          <div class="site-drawer__brand">
+            <img src="asset/logo_update.png" alt="" width="48" height="48" />
+            <div>
+              <span class="site-drawer__label">Explore</span>
+              <strong>MovieFlix</strong>
+            </div>
+          </div>
           <button class="drawer-close" type="button" aria-label="Close navigation">
             <span></span>
             <span></span>
@@ -64,7 +70,9 @@
           <a href="#socials">Socials</a>
           <a href="https://github.com/shalenMathew/MovieFlix_App">Source Code</a>
         </nav>
-        <a class="site-drawer__cta" href="https://github.com/shalenMathew/MovieFlix_App">Get App <span aria-hidden="true">&#8594;</span></a>
+        <div class="site-drawer__footer">
+          <a class="site-drawer__cta" href="https://github.com/shalenMathew/MovieFlix_App">Get the app <span aria-hidden="true">&#8594;</span></a>
+        </div>
       </aside>
 
       <div class="hero__visual">
@@ -107,6 +115,35 @@
               <p class="description__name">Shalen Mathew</p>
               <p class="description__role">Developer</p>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="features" aria-labelledby="features-title">
+      <h2 class="features__title" id="features-title">Features</h2>
+
+      <div class="features__stage" aria-label="Featured movie posters carousel">
+        <div class="features__mockup-wrap" aria-hidden="true">
+          <img
+            class="features__mockup"
+            src="asset/mockup_feat.webp"
+            alt=""
+            width="820"
+            height="980"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+
+        <div class="features__carousel" aria-hidden="true">
+          <div class="features__track">
+            <img class="features__poster is-active" src="asset/feat_1.png" alt="Movie poster 1" />
+            <img class="features__poster" src="asset/feat_2.png" alt="Movie poster 2" />
+            <img class="features__poster" src="asset/feat_3.png" alt="Movie poster 3" />
+            <img class="features__poster" src="asset/feat_4.png" alt="Movie poster 4" />
+            <img class="features__poster" src="asset/feat_5.png" alt="Movie poster 5" />
+            <img class="features__poster" src="asset/feat_6.png" alt="Movie poster 6" />
           </div>
         </div>
       </div>
@@ -169,6 +206,108 @@
           setDrawerState(false);
         }
       });
+
+
+      const featureTrack = document.querySelector(".features__track");
+      const originalFeaturePosters = Array.from(document.querySelectorAll(".features__poster"));
+      const featureSetSize = originalFeaturePosters.length;
+      const firstCloneSet = originalFeaturePosters.map((poster) => {
+        const clone = poster.cloneNode(true);
+        clone.classList.remove("is-active");
+        return clone;
+      });
+      const secondCloneSet = firstCloneSet.map((poster) => poster.cloneNode(true));
+      featureTrack.append(...firstCloneSet, ...secondCloneSet);
+
+      const featurePosters = Array.from(featureTrack.querySelectorAll(".features__poster"));
+      const featureCarousel = document.querySelector(".features__carousel");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let featureTimer;
+      let recycleTimer;
+      let pendingRecycleIndex = null;
+      let activePoster = featureSetSize;
+      let posterSlots = featurePosters.map((_, index) => featureSetSize - index);
+
+      const renderFeatureSlots = () => {
+        featurePosters.forEach((poster, index) => {
+          const posterStyles = window.getComputedStyle(poster);
+          const posterWidth = parseFloat(posterStyles.width);
+          const activeScale = parseFloat(posterStyles.getPropertyValue("--poster-active-scale")) || 1.08;
+          const sideScale = parseFloat(posterStyles.getPropertyValue("--poster-side-scale")) || 0.78;
+          const outwardShift = Math.sign(posterSlots[index]) * posterWidth * (activeScale - sideScale) / 2;
+
+          poster.style.setProperty("--poster-slot", posterSlots[index]);
+          poster.style.setProperty("--poster-shift", `${outwardShift}px`);
+          poster.classList.toggle("is-active", index === activePoster);
+        });
+      };
+
+      const repositionFeaturePoster = (index) => {
+        if (index === null) return;
+
+        featurePosters[index].classList.add("is-repositioning");
+        posterSlots[index] = featureSetSize - (featurePosters.length - 1);
+        renderFeatureSlots();
+        pendingRecycleIndex = null;
+        recycleTimer = undefined;
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            featurePosters[index].classList.remove("is-repositioning");
+          });
+        });
+      };
+
+      const advanceFeatureCarousel = () => {
+        if (featurePosters.length < 2 || reducedMotion.matches) return;
+
+        // Shift the row right so the next unique poster reaches center from the left.
+        posterSlots = posterSlots.map((slot) => slot + 1);
+        activePoster = (activePoster + 1) % featurePosters.length;
+        renderFeatureSlots();
+
+        // Recycle only after a poster has traveled fully beyond the right edge.
+        const recycledIndex = posterSlots.findIndex((slot) => slot > featureSetSize);
+        if (recycledIndex !== -1) {
+          pendingRecycleIndex = recycledIndex;
+          recycleTimer = window.setTimeout(() => {
+            repositionFeaturePoster(pendingRecycleIndex);
+          }, 920);
+        }
+      };
+
+      renderFeatureSlots();
+      window.addEventListener("resize", renderFeatureSlots, { passive: true });
+      if (featureCarousel && featurePosters.length > 1 && !reducedMotion.matches) {
+        const startFeatureLoop = () => {
+          window.clearTimeout(featureTimer);
+          if (reducedMotion.matches || document.hidden) return;
+          featureTimer = window.setTimeout(() => {
+            advanceFeatureCarousel();
+            startFeatureLoop();
+          }, 1900);
+        };
+        startFeatureLoop();
+        document.addEventListener("visibilitychange", () => {
+          window.clearTimeout(featureTimer);
+
+          if (document.hidden) {
+            if (recycleTimer !== undefined) {
+              window.clearTimeout(recycleTimer);
+              repositionFeaturePoster(pendingRecycleIndex);
+            }
+            return;
+          }
+
+          startFeatureLoop();
+        });
+        reducedMotion.addEventListener?.("change", () => {
+          window.clearTimeout(featureTimer);
+          if (!reducedMotion.matches) startFeatureLoop();
+        });
+      }
+
     </script>
+
   </body>
 </html>
