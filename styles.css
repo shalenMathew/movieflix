@@ -1063,9 +1063,9 @@ body {
 
   .features__card-art--mobile {
     display: block !important;
-    bottom: calc(100% - 2.8rem);
-    width: min(58%, 13rem);
-    height: 7.5rem;
+    bottom: calc(100% - 2.3rem);
+    width: min(44%, 10rem);
+    height: 6rem;
   }
 
   .features__title {
