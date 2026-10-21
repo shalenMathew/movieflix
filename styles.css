@@ -408,6 +408,29 @@ body {
   transform: translateX(-50%);
 }
 
+.features__card-media-frame {
+  position: absolute;
+  left: 50%;
+  bottom: -12rem;
+  width: min(74%, 12rem);
+  overflow: hidden;
+  border-radius: 1.35rem;
+  background: #05070d;
+  box-shadow: 0 0 0 5px #fff, 0 16px 34px rgba(0, 0, 0, 0.58);
+  transform: translateX(-50%);
+}
+
+.features__card-media-frame .features__card-media {
+  position: relative;
+  left: auto;
+  bottom: auto;
+  width: 100%;
+  max-width: none;
+  border-radius: 0;
+  box-shadow: none;
+  transform: translateY(-3rem);
+}
+
 /* Main composition area */
 .features__stage {
   position: relative;
