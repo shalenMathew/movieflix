@@ -419,7 +419,7 @@ body {
    * The image itself contains the correct empty purple
    * area where the posters should sit.
    */
-  width: min(34vw, 430px);
+  width: min(25vw, 320px);
 
   transform: translate(-50%, -50%);
   pointer-events: none;
@@ -465,12 +465,12 @@ body {
    * This corresponds to the large purple area
    * inside mockup_feat.webp.
    */
-  top: calc(50% + min(14.5vw, 183px) - 28px);
+  top: calc(50% + min(14.5vw, 183px) - 60px);
   left: calc(50% + clamp(8px, 1vw, 14px));
 
   z-index: 5;
 
-  width: min(100vw, 1300px);
+  width: min(70vw, 850px);
   height: clamp(15rem, 22vw, 18rem);
 
   transform: translate(-50%, -50%);
@@ -531,11 +531,11 @@ body {
 
   display: block;
 
-  width: clamp(8rem, 10vw, 9.5rem);
-  height: clamp(11rem, 18vw, 13.5rem);
-  --poster-step: clamp(8rem, 11.5vw, 8.8rem);
-  --poster-side-scale: 0.78;
-  --poster-active-scale: 1.08;
+  width: clamp(6.5rem, 7.6vw, 7.6rem);
+  height: clamp(9rem, 12.8vw, 10.6rem);
+  --poster-step: clamp(7rem, 8.1vw, 7.7rem);
+  --poster-side-scale: 0.9;
+  --poster-active-scale: 1.05;
 
   object-fit: cover;
 
@@ -628,6 +628,7 @@ body {
     width: clamp(7rem, 16vw, 8rem);
     height: clamp(9.5rem, 23vw, 11rem);
     --poster-step: clamp(7.3rem, 16vw, 8.4rem);
+    --poster-side-scale: 0.78;
   }
 
   .features__poster.is-active {
