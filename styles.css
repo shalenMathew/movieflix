@@ -1063,7 +1063,7 @@ body {
 
   .features__card-art--mobile {
     display: block !important;
-    bottom: calc(100% - 2.9rem);
+    bottom: calc(100% - 2.8rem);
     width: min(58%, 13rem);
     height: 7.5rem;
   }
