@@ -593,6 +593,85 @@ body {
   text-decoration: none;
 }
 
+.socials {
+  padding: clamp(2.5rem, 5vw, 3.5rem) 1.25rem clamp(3rem, 5vw, 4rem);
+  background: #0b0b0b;
+}
+
+.socials__title {
+  margin: 0;
+  color: transparent;
+  background: linear-gradient(100deg, #fff 20%, #dce5ff 62%, #8da7ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  filter: drop-shadow(0 3px 16px rgba(47, 83, 255, 0.22));
+}
+
+.socials__title::after {
+  display: block;
+  width: 2.75rem;
+  height: 3px;
+  margin: 0.8rem auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #1645ff, #9fb2ff);
+  box-shadow: 0 0 14px rgba(22, 69, 255, 0.5);
+  content: "";
+}
+
+.socials__list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1rem, 4vw, 3rem);
+  width: min(100%, 42rem);
+  margin: clamp(1.5rem, 2.5vw, 2rem) auto 0;
+}
+
+.socials__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+  color: #f5f5f5;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.socials__item:hover,
+.socials__item:focus-visible {
+  color: #9fb2ff;
+  transform: translateY(-3px);
+}
+
+.socials__item:focus-visible {
+  outline: 2px solid #9fb2ff;
+  outline-offset: 0.4rem;
+}
+
+.socials__item img {
+  display: block;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 1rem;
+  object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  .socials__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.75rem 1rem;
+  }
+}
+
 .installation__posters img,
 .installation__wordmark,
 .installation__signature {
@@ -1462,6 +1541,24 @@ body {
     top: calc(50% - 4rem + min(24.8vw, 128px) - 12px);
     width: min(114vw, 920px);
     height: clamp(9rem, 30vw, 13rem);
+  }
+}
+
+@media (max-width: 600px) {
+  .features__stage {
+    height: 32rem;
+  }
+
+  .features__mockup-wrap {
+    top: calc(50% - 1rem);
+  }
+
+  .features__carousel {
+    top: calc(50% - 1rem + min(24.8vw, 128px) - 12px);
+  }
+
+  .features__grid {
+    margin-top: 2rem;
   }
 }
 
