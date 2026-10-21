@@ -66,6 +66,20 @@ body {
   animation: heroVignetteReveal 1.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+.hero::after,
+.hero__title,
+.hero__mockup,
+.hero__blue-glow {
+  animation-play-state: paused;
+}
+
+html.hero-animation-ready .hero::after,
+html.hero-animation-ready .hero__title,
+html.hero-animation-ready .hero__mockup,
+html.hero-animation-ready .hero__blue-glow {
+  animation-play-state: running;
+}
+
 .site-header {
   position: absolute;
   top: clamp(0.75rem, 2vw, 1.75rem);
