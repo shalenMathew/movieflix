@@ -218,16 +218,6 @@
     </section>
 
     <script>
-      const startHeroAnimation = () => {
-        window.setTimeout(() => document.documentElement.classList.add("hero-animation-ready"), 1000);
-      };
-
-      if (document.readyState === "complete") {
-        startHeroAnimation();
-      } else {
-        window.addEventListener("load", startHeroAnimation, { once: true });
-      }
-
       const menuToggle = document.querySelector(".menu-toggle");
       const drawerClose = document.querySelector(".drawer-close");
       const drawer = document.querySelector(".site-drawer");

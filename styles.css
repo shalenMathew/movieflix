@@ -63,21 +63,7 @@ body {
       rgba(0, 0, 0, 0) 88%,
       rgba(0, 0, 0, 0.45) 100%
     );
-  animation: heroVignetteReveal 1.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.hero::after,
-.hero__title,
-.hero__mockup,
-.hero__blue-glow {
-  animation-play-state: paused;
-}
-
-html.hero-animation-ready .hero::after,
-html.hero-animation-ready .hero__title,
-html.hero-animation-ready .hero__mockup,
-html.hero-animation-ready .hero__blue-glow {
-  animation-play-state: running;
+  animation: heroVignetteReveal 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
 }
 
 .site-header {
@@ -1163,8 +1149,8 @@ html.hero-animation-ready .hero__blue-glow {
   transform: translateX(-50%);
   pointer-events: none;
   animation:
-    heroGlowReveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) both,
-    heroGlowBreathe 9s 1.8s ease-in-out infinite;
+    heroGlowReveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both,
+    heroGlowBreathe 9s 2.2s ease-in-out infinite;
   will-change: transform, opacity;
 }
 
@@ -1250,7 +1236,7 @@ html.hero-animation-ready .hero__blue-glow {
     0 0 40px rgba(255, 255, 255, 0.27),
     0 0 66px rgba(255, 255, 255, 0.14);
   white-space: nowrap;
-  animation: heroTitleReveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+  animation: heroTitleReveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both;
   will-change: transform, opacity, filter;
 }
 
@@ -1265,7 +1251,7 @@ html.hero-animation-ready .hero__blue-glow {
   transform: translateX(-50%);
   filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.86));
   user-select: none;
-  animation: heroMockupReveal 1.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+  animation: heroMockupReveal 1.9s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both;
   will-change: transform, opacity;
 }
 
@@ -1360,6 +1346,8 @@ html.hero-animation-ready .hero__blue-glow {
     width: min(140vw, 760px);
     height: auto;
     max-width: none;
+    filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.72));
+    animation: heroMockupRevealMobile 1.25s cubic-bezier(0.22, 0.61, 0.36, 1) 0.55s both;
   }
 
   .hero__blue-glow {
@@ -1419,6 +1407,17 @@ html.hero-animation-ready .hero__blue-glow {
   100% {
     opacity: 1;
     transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+@keyframes heroMockupRevealMobile {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
   }
 }
 
