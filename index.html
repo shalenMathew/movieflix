@@ -96,7 +96,8 @@
     <section class="description" id="reviews" aria-labelledby="description-title">
       <div class="description__inner">
         <div class="description__mascot" aria-hidden="true">
-          <img src="asset/mascot.gif" alt="" loading="lazy" decoding="async" />
+          <img class="description__mascot-logo" src="asset/logo.png" alt="" width="500" height="500" loading="lazy" decoding="async" />
+          <img class="description__mascot-shark" src="asset/ex2.png" alt="" width="519" height="600" loading="lazy" decoding="async" />
         </div>
         <div class="description__content">
           <p class="description__quote" id="description-title">
@@ -148,11 +149,14 @@
       </div>
 
       <div class="features__grid" aria-label="MovieFlix app features">
-        <article class="features__card">
-          <h3>Watchlist &amp; Favorites</h3>
-          <p>Keep your next watch close, and save the movies and shows you love.</p>
-          <img class="features__card-media" src="asset/feat_watchlist.jpg" alt="MovieFlix watchlist screen" loading="lazy" decoding="async" />
-        </article>
+        <div class="features__card-stack features__card-stack--watchlist">
+          <img class="features__card-art features__card-art--mobile" src="asset/ex3.png" alt="" loading="lazy" decoding="async" />
+          <article class="features__card">
+            <h3>Watchlist &amp; Favorites</h3>
+            <p>Keep your next watch close, and save the movies and shows you love.</p>
+            <img class="features__card-media" src="asset/feat_watchlist.jpg" alt="MovieFlix watchlist screen" loading="lazy" decoding="async" />
+          </article>
+        </div>
 
         <article class="features__card">
           <h3>Series tracking</h3>
@@ -160,11 +164,14 @@
           <img class="features__card-media" src="asset/feat_tracking.jpg" alt="MovieFlix series tracking screen" loading="lazy" decoding="async" />
         </article>
 
-        <article class="features__card">
-          <h3>Share posters</h3>
-          <p>Turn your movie picks into posters worth sharing.</p>
-          <img class="features__card-media" src="asset/feat_share.jpg" alt="MovieFlix poster sharing screen" loading="lazy" decoding="async" />
-        </article>
+        <div class="features__card-stack features__card-stack--share">
+          <img class="features__card-art" src="asset/ex3.png" alt="" loading="lazy" decoding="async" />
+          <article class="features__card">
+            <h3>Share posters</h3>
+            <p>Turn your movie picks into posters worth sharing.</p>
+            <img class="features__card-media" src="asset/feat_share.jpg" alt="MovieFlix poster sharing screen" loading="lazy" decoding="async" />
+          </article>
+        </div>
 
         <article class="features__card">
           <h3>Lists &amp; list sharing</h3>
