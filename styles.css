@@ -356,7 +356,7 @@ body {
   }
 
   .features__grid {
-    margin-top: -6rem;
+    margin-top: 1rem;
   }
 }
 
@@ -412,7 +412,7 @@ body {
 .features__stage {
   position: relative;
   width: 100%;
-  height: clamp(42rem, 62vw, 55rem);
+  height: clamp(32rem, 45vw, 42rem);
   margin: 0 auto;
   overflow: visible;
   isolation: isolate;
@@ -810,7 +810,7 @@ body {
   max-width: 44rem;
   margin: 0 0 0 auto;
   color: rgba(255, 255, 255, 0.92);
-  font-size: clamp(1.5rem, 3.3vw, 3rem);
+  font-size: clamp(1.35rem, 2.7vw, 2.4rem);
   font-weight: 400;
   line-height: 1.3;
   letter-spacing: -0.02em;
