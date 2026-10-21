@@ -5,6 +5,14 @@
   --black: #02030a;
 }
 
+@font-face {
+  font-family: "Brittany Signature";
+  src: url("asset/BrittanySignature.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -447,6 +455,223 @@ body {
   transform: none;
 }
 
+.installation {
+  padding: clamp(2rem, 4vw, 3.5rem) 1.25rem clamp(3.5rem, 7vw, 5rem);
+  overflow: hidden;
+  background: #0b0b0b;
+}
+
+.installation__heading {
+  margin: 0;
+  color: transparent;
+  background: linear-gradient(100deg, #fff 20%, #dce5ff 62%, #8da7ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  filter: drop-shadow(0 3px 16px rgba(47, 83, 255, 0.22));
+}
+
+.installation__heading::after {
+  display: block;
+  width: 2.75rem;
+  height: 3px;
+  margin: 0.8rem auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #1645ff, #9fb2ff);
+  box-shadow: 0 0 14px rgba(22, 69, 255, 0.5);
+  content: "";
+}
+
+.installation__stage {
+  position: relative;
+  width: min(88%, 68rem);
+  aspect-ratio: 992 / 414;
+  margin: 0 auto;
+  isolation: isolate;
+  container-type: inline-size;
+}
+
+.installation__posters {
+  position: absolute;
+  top: 16.4%;
+  left: 2.8%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: minmax(0, 1fr);
+  gap: 2.2%;
+  width: 50.7%;
+  aspect-ratio: 1.8 / 1;
+  overflow: hidden;
+}
+
+.installation__posters img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  object-fit: cover;
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+
+.installation__posters img.is-leaving {
+  opacity: 0;
+  transform: translateX(-0.8rem);
+}
+
+.installation__posters img.is-entering {
+  opacity: 0;
+  transform: translateX(0.8rem);
+}
+
+.installation__wordmark {
+  position: absolute;
+  top: 42.8%;
+  right: 12.7%;
+  z-index: 1;
+  margin: 0;
+  color: #f5f5f5;
+  font-size: clamp(1.5rem, 5.25cqw, 5.5rem);
+  font-weight: 900;
+  letter-spacing: -0.055em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.installation__signature {
+  position: absolute;
+  top: 70%;
+  right: 12.7%;
+  z-index: 2;
+  width: max-content;
+  margin: 0;
+  color: #f5f5f5;
+  font-family: "Brittany Signature", cursive;
+  font-size: clamp(2rem, 5.5vw, 4.5rem);
+  font-weight: 400;
+  line-height: 0.9;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.installation__details {
+  width: min(100%, 42rem);
+  margin: clamp(1.25rem, 2.5vw, 2rem) auto 0;
+  text-align: center;
+}
+
+.installation__prompt {
+  margin: 0 0 0.85rem;
+  color: #f5f5f5;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.installation__sources {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.65rem;
+  width: min(100%, 42rem);
+  margin: 0 auto;
+}
+
+.installation__source {
+  flex: 1 1 11rem;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.75rem 1.75rem;
+  border: 0;
+  font: inherit;
+  text-align: center;
+  text-decoration: none;
+}
+
+.installation__posters img,
+.installation__wordmark,
+.installation__signature {
+  opacity: 1;
+}
+
+.installation.is-visible .installation__posters img {
+  animation: installationPosterReveal 360ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.installation.is-visible .installation__posters img:nth-child(2) {
+  animation-delay: 80ms;
+}
+
+.installation.is-visible .installation__wordmark {
+  animation: installationWordmarkReveal 750ms 180ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.installation.is-visible .installation__signature {
+  animation: installationSignatureReveal 1100ms 380ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+@media (max-width: 700px) {
+  .installation {
+    padding-right: 1rem;
+    padding-bottom: 3.5rem;
+    padding-left: 1rem;
+  }
+
+  .installation__stage {
+    width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+    min-height: clamp(18rem, 78vw, 28rem);
+  }
+
+  .installation__posters {
+    top: 8%;
+    left: 7%;
+    width: 86%;
+    height: 46%;
+    aspect-ratio: auto;
+  }
+
+  .installation__wordmark {
+    top: 48%;
+    right: 4%;
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+
+  .installation__signature {
+    top: 62%;
+    left: 4%;
+    right: auto;
+    width: 94%;
+    font-size: clamp(2rem, 8cqw, 3rem);
+    text-align: center;
+  }
+
+  .installation__details {
+    margin-top: 1rem;
+  }
+}
+
+@keyframes installationPosterReveal {
+  from { opacity: 0; transform: translateY(2rem) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes installationWordmarkReveal {
+  from { opacity: 0; filter: blur(10px); transform: translateY(1rem); }
+  to { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+
+@keyframes installationSignatureReveal {
+  from { opacity: 0; transform: translateY(0.75rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* Main composition area */
 .features__stage {
   position: relative;
@@ -745,7 +970,7 @@ body {
     width: clamp(5.3rem, 20vw, 6.3rem);
     height: clamp(7rem, 34vw, 8.5rem);
     --poster-step: clamp(5.25rem, 19vw, 6.4rem);
-    --poster-active-scale: 1.04;
+    --poster-active-scale: 0.98;
 
     border-radius: 0.8rem;
   }
@@ -754,7 +979,7 @@ body {
     transform:
       translate(-50%, -50%)
       translateX(calc(var(--poster-slot, 0) * var(--poster-step, 180px) + var(--poster-shift, 0px)))
-      scale(var(--poster-active-scale, 1.04));
+      scale(var(--poster-active-scale, 0.98));
   }
 }
 
@@ -1216,12 +1441,12 @@ body {
   }
 
   .features__mockup-wrap {
-    top: 58%;
+    top: calc(50% - 4rem);
     width: min(58vw, 300px);
   }
 
   .features__carousel {
-    top: calc(58% + min(24.8vw, 128px) - 12px);
+    top: calc(50% - 4rem + min(24.8vw, 128px) - 12px);
     width: min(114vw, 920px);
     height: clamp(9rem, 30vw, 13rem);
   }
@@ -1244,5 +1469,15 @@ body {
   .hero__mockup,
   .hero__blue-glow {
     transform: translateX(-50%) !important;
+  }
+
+  .installation__posters img,
+  .installation__wordmark,
+  .installation__signature {
+    animation: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    clip-path: none !important;
+    transform: none !important;
   }
 }

@@ -66,12 +66,11 @@
         </div>
         <nav class="site-drawer__nav">
           <a href="#features">Features</a>
-          <a href="#reviews">Reviews</a>
           <a href="#socials">Socials</a>
           <a href="https://github.com/shalenMathew/MovieFlix_App">Source Code</a>
         </nav>
         <div class="site-drawer__footer">
-          <a class="site-drawer__cta" href="https://github.com/shalenMathew/MovieFlix_App">Get the app <span aria-hidden="true">&#8594;</span></a>
+          <a class="site-drawer__cta" href="#installation">Get the app <span aria-hidden="true">&#8594;</span></a>
         </div>
       </aside>
 
@@ -198,7 +197,25 @@
 
     </section>
 
-    <p class="work-in-progress">Work in progress</p>
+    <section class="installation" id="installation" aria-labelledby="installation-title">
+      <h2 class="installation__heading" id="installation-title">INSTALL</h2>
+      <div class="installation__stage">
+        <div class="installation__posters" aria-hidden="true">
+          <img src="asset/p1.jpg" alt="" width="540" height="810" loading="lazy" decoding="async" />
+          <img src="asset/p2.jpg" alt="" width="540" height="810" loading="lazy" decoding="async" />
+        </div>
+        <h2 class="installation__wordmark">MOVIEFLIX</h2>
+        <p class="installation__signature" aria-hidden="true">EXPERIENCE</p>
+      </div>
+      <div class="installation__details">
+        <p class="installation__prompt">Install from</p>
+        <div class="installation__sources" aria-label="Installation sources">
+          <a class="installation__source site-drawer__cta" href="https://f-droid.org/en/packages/com.shalenmathew.movieflix/" target="_blank" rel="noopener noreferrer">F-Droid</a>
+          <a class="installation__source site-drawer__cta" href="https://apt.izzysoft.de/fdroid/index/apk/com.shalenmathew.movieflix" target="_blank" rel="noopener noreferrer">IzzyOnDroid</a>
+          <a class="installation__source site-drawer__cta" href="https://github.com/shalenMathew/MovieFlix_App/releases" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </div>
+    </section>
 
     <script>
       const menuToggle = document.querySelector(".menu-toggle");
@@ -354,6 +371,102 @@
           if (!reducedMotion.matches) startFeatureLoop();
         });
       }
+
+      const installation = document.querySelector(".installation");
+      const installationPosters = Array.from(document.querySelectorAll(".installation__posters img"));
+      const installationPosterOrder = [
+        "asset/p1.jpg",
+        "asset/p2.jpg",
+        "asset/p3.jpg",
+        "asset/p4.jpg",
+        "asset/p5.jpg",
+        "asset/p6.jpg",
+        "asset/p7.jpg",
+        "asset/p8.jpg",
+        "asset/p9.jpg",
+        "asset/p10.jpg",
+      ];
+      let installationPosterIndex = 1;
+      let installationPosterIntervals = [];
+      let installationPosterTimeouts = [];
+      let installationPosterLoopRunning = false;
+      let installationPosterGeneration = 0;
+
+      const cycleInstallationPoster = async (poster, generation) => {
+        if (!installationPosterLoopRunning || generation !== installationPosterGeneration) return;
+        installationPosterIndex = (installationPosterIndex + 1) % installationPosterOrder.length;
+        const nextSource = installationPosterOrder[installationPosterIndex];
+        const nextImage = new Image();
+        nextImage.src = nextSource;
+        try {
+          await nextImage.decode();
+        } catch {
+          return;
+        }
+        if (!installationPosterLoopRunning || generation !== installationPosterGeneration || document.hidden) return;
+
+        poster.classList.add("is-leaving");
+        const timeout = window.setTimeout(() => {
+          if (!installationPosterLoopRunning || generation !== installationPosterGeneration) return;
+          poster.src = nextSource;
+          poster.classList.remove("is-leaving");
+          poster.classList.add("is-entering");
+          requestAnimationFrame(() => requestAnimationFrame(() => {
+            poster.classList.remove("is-entering");
+          }));
+        }, 120);
+        installationPosterTimeouts.push(timeout);
+      };
+
+      const startInstallationPosterLoop = () => {
+        if (!installationPosterLoopRunning && !document.hidden && !reducedMotion.matches) {
+          installationPosterLoopRunning = true;
+          const generation = ++installationPosterGeneration;
+          installationPosters.forEach((poster, slot) => {
+            const initialDelay = 500 + slot * 500;
+            const startTimeout = window.setTimeout(() => {
+              cycleInstallationPoster(poster, generation);
+              const interval = window.setInterval(() => cycleInstallationPoster(poster, generation), 1000);
+              installationPosterIntervals[slot] = interval;
+            }, initialDelay);
+            installationPosterTimeouts.push(startTimeout);
+          });
+        }
+      };
+
+      const stopInstallationPosterLoop = () => {
+        installationPosterLoopRunning = false;
+        installationPosterGeneration++;
+        installationPosterIntervals.forEach((interval) => window.clearInterval(interval));
+        installationPosterTimeouts.forEach((timeout) => window.clearTimeout(timeout));
+        installationPosterIntervals = [];
+        installationPosterTimeouts = [];
+        installationPosters.forEach((poster) => poster.classList.remove("is-leaving", "is-entering"));
+      };
+
+      if (installation && !reducedMotion.matches && "IntersectionObserver" in window) {
+        const installationObserver = new IntersectionObserver((entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            installation.classList.add("is-visible");
+            startInstallationPosterLoop();
+          } else {
+            stopInstallationPosterLoop();
+          }
+        }, { threshold: 0.2 });
+        installationObserver.observe(installation);
+      } else {
+        installation?.classList.add("is-visible");
+      }
+
+      if (!installation || !("IntersectionObserver" in window)) startInstallationPosterLoop();
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          stopInstallationPosterLoop();
+        } else if (installation) {
+          const bounds = installation.getBoundingClientRect();
+          if (bounds.bottom > 0 && bounds.top < window.innerHeight) startInstallationPosterLoop();
+        }
+      });
 
     </script>
 
