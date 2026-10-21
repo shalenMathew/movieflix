@@ -431,6 +431,22 @@ body {
   transform: translateY(-3rem);
 }
 
+.features__card--gallery {
+  padding-top: 20rem;
+}
+
+.features__card--gallery .features__card-media-frame {
+  top: -10rem;
+  bottom: auto;
+  width: min(74%, 12rem);
+  height: auto;
+}
+
+.features__card--gallery .features__card-media-frame .features__card-media {
+  height: auto;
+  transform: none;
+}
+
 /* Main composition area */
 .features__stage {
   position: relative;
