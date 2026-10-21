@@ -309,7 +309,7 @@ body {
 .features__title {
   position: relative;
   z-index: 10;
-  margin: 0 0 clamp(1.5rem, 3vw, 2.5rem);
+  margin: 0 0 clamp(1rem, 2vw, 1.5rem);
   color: transparent;
   background: linear-gradient(100deg, #fff 20%, #dce5ff 62%, #8da7ff 100%);
   -webkit-background-clip: text;
@@ -339,11 +339,25 @@ body {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(0.9rem, 2vw, 1.35rem);
   width: min(100% - 2.5rem, 72rem);
-  margin: clamp(2rem, 5vw, 4rem) auto 0;
+  margin: clamp(1.25rem, 3vw, 2.5rem) auto 0;
 }
 
 .features__card:last-child:nth-child(3n + 1) {
   grid-column: 2;
+}
+
+@media (min-width: 901px) {
+  .features__mockup-wrap {
+    top: calc(50% - 4rem);
+  }
+
+  .features__carousel {
+    top: calc(50% + min(14.5vw, 183px) - 60px - 4rem);
+  }
+
+  .features__grid {
+    margin-top: -6rem;
+  }
 }
 
 .features__card {
