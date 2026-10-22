@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shalenmathew.github.io/movieflix/sitemap.xml
