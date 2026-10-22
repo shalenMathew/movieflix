@@ -1075,7 +1075,7 @@ body {
     top: 0;
     bottom: auto;
     z-index: 5;
-    width: min(44%, 10rem);
+    width: min(46%, 10.5rem);
     height: auto;
     transform: translate(-50%, -60%);
   }
