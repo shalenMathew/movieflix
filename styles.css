@@ -1601,11 +1601,30 @@ body {
   }
 }
 
+@media (max-width: 600px) {
+  .description__mascot-logo {
+    right: auto;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+  }
+
+  .description__mascot-shark {
+    animation-name: mascotSharkBiteMobile;
+  }
+}
+
 @keyframes mascotSharkBite {
   0%, 8%, 87%, 100% { transform: translate(-105%, -50%) rotate(-2deg); }
   34% { transform: translate(-7%, -50%) rotate(0); }
   38%, 60% { transform: translate(0, -50%) rotate(2deg) scale(0.98); }
   72% { transform: translate(-7%, -50%) rotate(0); }
+}
+
+@keyframes mascotSharkBiteMobile {
+  0%, 8%, 87%, 100% { transform: translate(-105%, -50%) rotate(-2deg); }
+  34% { transform: translate(-22%, -50%) rotate(0); }
+  38%, 60% { transform: translate(-18%, -50%) rotate(2deg) scale(0.98); }
+  72% { transform: translate(-22%, -50%) rotate(0); }
 }
 
 @keyframes heroGlowReveal {
