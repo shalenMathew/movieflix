@@ -421,6 +421,15 @@ body {
   z-index: 3;
 }
 
+.features__card-stack--share .features__card h3,
+.features__card-stack--share .features__card > p:not(.features__card-tagline) {
+  z-index: 1;
+}
+
+.features__card-stack--share .features__card-art {
+  z-index: 5;
+}
+
 .features__card-tagline {
   display: none;
 }
@@ -1063,9 +1072,17 @@ body {
 
   .features__card-art--mobile {
     display: block !important;
-    bottom: calc(100% - 2.3rem);
+    top: 0;
+    bottom: auto;
+    z-index: 5;
     width: min(44%, 10rem);
-    height: 6rem;
+    height: auto;
+    transform: translate(-50%, -60%);
+  }
+
+  .features__card-stack--watchlist .features__card h3,
+  .features__card-stack--watchlist .features__card > p:not(.features__card-tagline) {
+    z-index: 1;
   }
 
   .features__title {
